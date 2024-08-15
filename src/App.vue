@@ -11,12 +11,37 @@ function updateCart(newCart: any[]) {
   cart.value = newCart;
 };
 
+function addCartItem(newProduct: any) {
+  const cartItemIndex = cart.value.findIndex(cartItem => newProduct.id === cartItem.id);
+  if (cartItemIndex > -1) {
+    cart.value[cartItemIndex].amount++;
+  }
+  else {
+    cart.value = [...cart.value, {...newProduct, amount: 1}];
+  }
+}
+
+function removeCartItem(targetProduct: any) {
+  const cartItemIndex = cart.value.findIndex(cartItem => targetProduct.id === cartItem.id);
+  if (cartItemIndex > -1) {
+    cart.value[cartItemIndex].amount--;
+    const foundCartItem = cart.value[cartItemIndex].amount;
+    if (foundCartItem.amount <= 0) {
+      cart.value = cart.value.filter(searchCartItem => searchCartItem.id !== foundCartItem.id);
+      return;
+    }
+  }
+  else {
+    cart.value = [...cart.value, {...targetProduct, amount: 1}];
+  }
+}
+
 provide("cart", {
   cart,
   updateCart
 });
 
-const products = ref([]);
+const products = ref(Array<any>());
 
 function updateProducts(newProducts: any) {
   products.value = newProducts;

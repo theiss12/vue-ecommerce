@@ -59,6 +59,66 @@
             "description": "Instantly Melting Ice",
             "imageUrl": "./images/p (10).jpg",
             "price": 1000
+        },
+        {
+            "id": 11,
+            "description": "Fireproof Matches",
+            "imageUrl": "./images/p (1).jpg",
+            "price": 100
+        },
+        {
+            "id": 12,
+            "description": "Silent Alarm Clock",
+            "imageUrl": "./images/p (2).jpg",
+            "price": 200
+        },
+        {
+            "id": 13,
+            "description": "Invisible Paint",
+            "imageUrl": "./images/p (3).jpg",
+            "price": 300
+        },
+        {
+            "id": 14,
+            "description": "Edible Cutlery",
+            "imageUrl": "./images/p (4).jpg",
+            "price": 400
+        },
+        {
+            "id": 15,
+            "description": "Dehydrated Water",
+            "imageUrl": "./images/p (5).jpg",
+            "price": 500
+        },
+        {
+            "id": 16,
+            "description": "Self-Deflating Balloon",
+            "imageUrl": "./images/p (6).jpg",
+            "price": 600
+        },
+        {
+            "id": 17,
+            "description": "One-Time Use Reusable Bag",
+            "imageUrl": "./images/p (7).jpg",
+            "price": 700
+        },
+        {
+            "id": 18,
+            "description": "Flammable Fire Extinguisher",
+            "imageUrl": "./images/p (8).jpg",
+            "price": 800
+        },
+        {
+            "id": 19,
+            "description": "Transparent Privacy Screen",
+            "imageUrl": "./images/p (9).jpg",
+            "price": 900
+        },
+        {
+            "id": 20,
+            "description": "Instantly Melting Ice",
+            "imageUrl": "./images/p (10).jpg",
+            "price": 1000
         }
     ]
 }

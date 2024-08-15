@@ -100,11 +100,25 @@ onMounted(() => {
                 <span class="arrow"></span>
             </button>
         </div>
+        <div class="component-slider__pagination">
+            <button
+                v-for="(product, productIndex) in randomProducts" :key="productIndex"
+                v-bind:value="productIndex"
+                @click="() => {
+                    activeIndex = productIndex;
+                    restartInterval();
+                }"
+                v-bind:class="`pagination-button${productIndex === activeIndex ? ' pagination-button--active' : ''}`"
+            >
+                {{ productIndex }}
+            </button>
+        </div>
     </section>
 </template>
 
 <style scoped lang="scss">
 .component-slider {
+    margin: 0 0 64px;
     position: relative;
 
     .reroll-button {
@@ -133,6 +147,7 @@ onMounted(() => {
         overflow: hidden;
         background-color: white;
         box-shadow: inset 0 0 15px black;
+        border-radius: 10px;
 
         .slide {
             display: flex;
@@ -140,7 +155,7 @@ onMounted(() => {
             align-items: center;
             grid-area: 1 / 1; // pile
             height: 30vh;
-            width: 80vw;
+            width: 70vw;
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -159,9 +174,13 @@ onMounted(() => {
             &__description {
                 text-align: center;
                 margin: 0;
+                // width: fit-content;
+                padding: 10px;
+                border-radius: 10px;
                 width: 66%;
                 color: white;
                 text-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px, rgba(0, 0, 0, 0.3) 0px 2px 13px, rgba(0, 0, 0, 0.3) 0px 3px 23px;
+                backdrop-filter: blur(5px);
             }
         }
     }
@@ -201,6 +220,33 @@ onMounted(() => {
 
             &--right {
                 rotate: 315deg;
+            }
+        }
+    }
+
+    &__pagination {
+        --size: 15px;
+        position: absolute;
+        bottom: var(--size);
+        left: 50%;
+        translate: -50% 0;
+        display: flex;
+        justify-content: center;
+        gap: var(--size);
+
+        .pagination-button {
+            color: transparent;
+            border: none;
+            padding: 0;
+            box-sizing: border-box;
+            width: var(--size);
+            height: var(--size);
+            border-radius: 50%;
+            background-color: black;
+            transition: scale .25s;
+
+            &--active {
+                scale: 1.5;
             }
         }
     }

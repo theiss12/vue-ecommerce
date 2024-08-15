@@ -9,29 +9,6 @@ const props = defineProps<{
 
 const serviceItems = ref(props.serviceItems);
 
-/*
-[
-    {
-        title: "Consulting",
-        description: "Lorem ipsum...",
-        imageUrl: "./images/services/service (1).png",
-        endpointUrl: "#"
-    },
-    {
-        title: "Sales",
-        description: "Lorem ipsum...",
-        imageUrl: "./images/services/service (2).png",
-        endpointUrl: "#"
-    },
-    {
-        title: "Carreer",
-        description: "Lorem ipsum...",
-        imageUrl: "./images/services/service (3).png",
-        endpointUrl: "#"
-    }
-]
-*/
-
 </script>
 
 <template>
@@ -52,7 +29,7 @@ const serviceItems = ref(props.serviceItems);
                     <p class="service__description">
                         {{ serviceItem.description }}
                     </p>
-                    <RouterLink class="service__visit-button" v-bind:to="serviceItem.endpointUrl">Visit</RouterLink>
+                    <RouterLink class="button" v-bind:to="serviceItem.endpointUrl">Visit</RouterLink>
                 </div>
             </div>
         </div>
@@ -71,27 +48,44 @@ const serviceItems = ref(props.serviceItems);
         align-items: center;
 
         .service {
+            --spacer: 24px;
+
             display: flex;
             flex-direction: column;
             justify-content: space-evenly;
             align-items: center;
+            margin: 0 0 48px;
+            padding: 30px;
+            color: white;
+            box-shadow: 0 0 20px rgba(0, 0, 0, .5);
+            transition: all .25s;
             
             &__image {
-                width: 100px;
-                height: 100px;
-                object-fit: contain;
+                --image-size: 150px;
+
+                margin: 0 0 var(--spacer);
+                width: var(--image-size);
+                height: var(--image-size);
+                object-fit: cover;
+                border-radius: 50%;
             }
 
             &__title {
-
+                margin: 0 0 var(--spacer);
             }
 
             &__description {
-
+                margin: 0 0 var(--spacer);
             }
 
-            &__visit-button {
+            // &__visit-button {
 
+            // }
+
+            &:hover {
+                background-color: darkgray;
+                box-shadow: 0 0 20px rgba(255, 255, 255, .5);
+                scale: 1.1;
             }
         }
     }

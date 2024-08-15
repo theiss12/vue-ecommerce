@@ -3,6 +3,7 @@
 import { inject, ref } from 'vue';
 import Suggestions from '@/components/Suggestions.vue';
 import Services from '@/components/Services.vue';
+import Tiles from '@/components/Tiles.vue';
 
 const services = [
   {
@@ -31,5 +32,6 @@ const services = [
   <main>
     <Suggestions />
     <Services v-bind:service-items="services" />
+    <Tiles />
   </main>
 </template>

@@ -48,6 +48,7 @@ body {
 
 .button {
   background-color: orange;
+  cursor: pointer;
   color: black;
   border-radius: 6px;
   border: none;
@@ -56,6 +57,8 @@ body {
   font-size: 20px;
   min-width: 50px;
   transition: all .25s;
+  text-decoration: none;
+  text-align: center;
 
   &:active {
     border-bottom: 0px solid orangered;

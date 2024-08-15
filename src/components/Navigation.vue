@@ -6,7 +6,8 @@ import { ref } from 'vue';
 const navigationItems = ref([
     {path: "/", label: "Home"},
     {path: "/about", label: "About"},
-    {path: "/checkout", label: "Checkout"},
+    // {path: "/products", label: "Products"},
+    {path: "/cart", label: "Cart"}
 ]);
 const navigationClosed = ref(true);
 

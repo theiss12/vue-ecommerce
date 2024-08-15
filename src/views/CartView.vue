@@ -1,19 +1,19 @@
 <script setup lang="ts">
 
-import { inject, onMounted } from 'vue';
+import { inject } from 'vue';
 
 const {cart, updateCart} = inject("cart");
 
-onMounted(() => {
-    updateCart([
-        {
-            id: 1,
-            name: "Some Product",
-            price: "1999",
-            amount: 2
-        }
-    ])
-});
+// onMounted(() => {
+//     updateCart([
+//         {
+//             id: 1,
+//             name: "Some Product",
+//             price: "1999",
+//             amount: 2
+//         }
+//     ])
+// });
 
 </script>
 
