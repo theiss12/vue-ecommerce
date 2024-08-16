@@ -2,8 +2,8 @@
 // import { RouterLink, RouterView } from 'vue-router'
 // import HelloWorld from './components/HelloWorld.vue'
 import DefaultLayout from './components/DefaultLayout.vue';
-import { provide, ref } from 'vue';
-import { getProducts } from './services/api';
+import { provide, ref, onMounted } from 'vue';
+import { getProducts } from './services/api/index.js';
 
 const cart = ref(Array<any>());
 
@@ -31,9 +31,6 @@ function removeCartItem(targetProduct: any) {
       return;
     }
   }
-  else {
-    cart.value = [...cart.value, {...targetProduct, amount: 1}];
-  }
 }
 
 provide("cart", {
@@ -52,7 +49,10 @@ provide("products", {
   updateProducts
 });
 
-getProducts().then(productsJSON => updateProducts(productsJSON.data));
+onMounted(() => {
+  getProducts()
+    .then(productsJSON => updateProducts(productsJSON.data));
+})
 
 </script>
 

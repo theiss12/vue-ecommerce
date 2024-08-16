@@ -72,7 +72,7 @@ onMounted(() => {
                     {{ inspectedProduct.price }} EUR
                 </p>
                 <div class="controlls">
-                    <RouterLink to="/" class="controlls__button controlls__button--view">
+                    <RouterLink :to="`./product?id=${inspectedProduct.id}`" class="controlls__button controlls__button--view">
                         View
                     </RouterLink>
                     <button class="controlls__button controlls__button--cart" @click="() => { }">

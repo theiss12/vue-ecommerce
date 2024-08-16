@@ -32,7 +32,7 @@ const {cart, updateCart} = inject("cart");
                         {{ cartItem.price + " EUR" }}
                     </p>
                     <p>
-                        {{ cartItem.amount }}
+                        x{{ cartItem.amount }}
                     </p>
                 </div>
             </div>
