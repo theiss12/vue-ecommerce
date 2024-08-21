@@ -4,11 +4,13 @@
 import DefaultLayout from './components/DefaultLayout.vue';
 import { provide, ref, onMounted } from 'vue';
 import { getProducts } from './services/api/index.js';
+import { getSessionCart, setSessionCart } from './services/cart/index.js';
 
-const cart = ref(Array<any>());
+const cart = ref(getSessionCart());
 
 function updateCart(newCart: any[]) {
   cart.value = newCart;
+  setSessionCart(cart.value);
 };
 
 function addCartItem(newProduct: any) {
@@ -17,25 +19,29 @@ function addCartItem(newProduct: any) {
     cart.value[cartItemIndex].amount++;
   }
   else {
-    cart.value = [...cart.value, {...newProduct, amount: 1}];
+    updateCart([...cart.value, {...newProduct, amount: 1}]);
   }
+  setSessionCart(cart.value);
 }
 
 function removeCartItem(targetProduct: any) {
   const cartItemIndex = cart.value.findIndex(cartItem => targetProduct.id === cartItem.id);
   if (cartItemIndex > -1) {
     cart.value[cartItemIndex].amount--;
-    const foundCartItem = cart.value[cartItemIndex].amount;
+    const foundCartItem = cart.value[cartItemIndex];
     if (foundCartItem.amount <= 0) {
-      cart.value = cart.value.filter(searchCartItem => searchCartItem.id !== foundCartItem.id);
-      return;
+      updateCart(cart.value.filter(searchCartItem => searchCartItem.id !== foundCartItem.id));
+      // return;
     }
   }
+  setSessionCart(cart.value);
 }
 
 provide("cart", {
   cart,
-  updateCart
+  updateCart,
+  addCartItem,
+  removeCartItem
 });
 
 const products = ref(Array<any>());

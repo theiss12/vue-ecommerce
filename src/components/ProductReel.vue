@@ -1,7 +1,9 @@
 <script setup lang="ts">
 
 import { ref, inject, onMounted } from 'vue';
+import { useRouter } from "vue-router";
 
+const router = useRouter();
 const { products } = inject("products");
 const activeIndex = ref(0);
 const intervalId = ref(0);
@@ -73,7 +75,7 @@ onMounted(() => {
                 v-for="(product, index) in randomProducts" :key="index"
                 v-bind:class="`slide${index === activeIndex ? ' slide--active' : ''}`"
                 v-bind:style="`background-image: url('${product.imageUrl}')`"
-                @click="() => {console.log(product.id)}"
+                @click="() => { router.push(`/product?id=${product.id}`) }"
             >
                 <h2 class="slide__description">
                     {{ product.description }}

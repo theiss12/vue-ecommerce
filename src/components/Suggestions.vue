@@ -1,6 +1,6 @@
 <script setup>
 
-import { defineProps, onMounted, ref, watch } from "vue";
+import { defineProps, ref, watch } from "vue";
 import { useRouter, useRoute } from "vue-router"
 
 const router = useRouter();
@@ -31,10 +31,6 @@ function pickItems() {
 
 const suggestables = ref(pickItems());
 
-onMounted(() => {
-    console.log(suggestables.value);
-})
-
 watch(route, () => {
     suggestables.value = pickItems();
 });
@@ -50,11 +46,12 @@ watch(route, () => {
                     v-for="(suggestion, index) in suggestables"
                     :key="index"
                     @click="() => {router.push(suggestion.endpointUrl)}"
+                    :style="`background-image: url('${suggestion.imageUrl}')`"
                 >
-                    <img class="suggestion__image" :src="suggestion.imageUrl">
                     <h2 class="suggestion__title">
                         {{ suggestion.title }}
                     </h2>
+                    <!-- <img class="suggestion__image" :src="suggestion.imageUrl"> -->
                 </div>
             </div>
         </div>
@@ -64,13 +61,43 @@ watch(route, () => {
 <style scoped lang="scss">
 
 .component-suggestions {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: inset 0 0 10px black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 56px 0 0;
+
     .suggestions {
         .suggestion {
-            &__image {
-                object-fit: cover;
-                width: 100px;
-                height: 100px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            margin: 0 0 56px;
+            box-shadow: 0 0 20px black;
+            width: 66vw;
+            height: 66vw;
+            transition: all .25s;
+
+            &:hover {
+                scale: 1.1;
             }
+
+            &__title {
+                background-color: #333;
+                color: white;
+                padding: 10px;
+                margin: 0;
+                text-align: center;
+            }
+
+            // &__image {
+            //     object-fit: cover;
+            //     width: 100%;
+            //     height: 100%;
+            // }
         }
     }
 }

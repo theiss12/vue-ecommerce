@@ -8,6 +8,7 @@ import Suggestions from "../components/Suggestions.vue"
 const route = useRoute();
 const router = useRouter();
 const { products } = inject("products");
+const { cart, addCartItem } = inject("cart");
 const slugProduct = ref({
     id: -1,
     description: "",
@@ -28,6 +29,7 @@ function setProductByQueryString() {
     else {
         notFound.value = true;
     }
+    window.scroll(0,0);
 }
 
 onMounted(() => setProductByQueryString());
@@ -39,9 +41,9 @@ watch(route, () => {
 </script>
 
 <template>
-    <section v-if="!notFound" class="screen-product">
+    <section class="screen-product">
         <div class="container">
-            <div class="product">
+            <div v-if="!notFound" class="product">
                 <img class="product__image" :src="slugProduct.imageUrl">
                 <h2 class="product__description">
                     {{ slugProduct.description }}
@@ -49,20 +51,23 @@ watch(route, () => {
                 <p class="product__price">
                     {{ slugProduct.price }} EUR
                 </p>
+                <div class="controlls">
+                    <button
+                        class="controlls__button controlls__button--back"
+                        @click="() => {router.push('/')}"
+                    >
+                        Back
+                    </button>
+                    <button
+                        class="controlls__button controlls__button--cart"
+                        @click="() => {addCartItem(slugProduct)}"
+                    >
+                        Add To Cart
+                    </button>
+                </div>
             </div>
-            <div class="controlls">
-                <button
-                    class="controlls__button"
-                    @click="() => {router.push('/')}"
-                >
-                    Back
-                </button>
-                <button
-                    class="controlls__button"
-                    @click="() => {}"
-                >
-                    Add To Cart
-                </button>
+            <div v-else class="not-found-message">
+                Product not found!
             </div>
             <Suggestions
                 :suggestables="products.map(product => ({
@@ -73,9 +78,6 @@ watch(route, () => {
             />
         </div>
     </section>
-    <div v-else class="not-found-message">
-        Product not found!
-    </div>
 </template>
 
 <style scoped lang="scss">
@@ -84,8 +86,56 @@ watch(route, () => {
     .product {
         &__image {
             object-fit: contain;
-            width: 100px;
-            height: 100px;
+            height: 50svh;
+            width: 100svw;
+            background-color: white;
+            display: block;
+            padding: 50px 0;
+            margin: 0 0 48px;
+            box-shadow: inset 0 0 20px black;
+            border-radius: 10px;
+        }
+
+        &__description {
+            margin: 0 0 24px;
+            font-size: 48px;
+            text-align: center;
+            color: white;
+            text-transform:uppercase;
+        }
+
+        &__price {
+            margin: 0 0 24px;
+            font-size: 48px;
+            text-align: center;
+            color: white;
+        }
+
+        .controlls {
+            margin: 0 0 48px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+
+            &__button {
+                --color: black;
+                background-color: transparent;
+                padding: 20px;
+                font-size: 20px;
+                border: none;
+                background-color: var(--color);
+                box-shadow: 0 0 10px var(--color);
+                border-radius: 5px;
+                cursor: pointer;
+
+                &--back {
+                    --color: crimson;
+                }
+
+                &--cart {
+                    --color: chartreuse;
+                }
+            }
         }
     }
 }

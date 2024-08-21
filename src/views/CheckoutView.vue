@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import { ref, inject, onMounted } from 'vue';
+import { ref, inject } from 'vue';
+import { useRouter } from "vue-router";
 import Shipping from '@/components/checkout/Shipping.vue';
 import Summary from '@/components/checkout/Summary.vue';
 
-const {cart, updateCart} = inject("cart");
+const router = useRouter();
+const { cart, updateCart } = inject("cart");
 
 const steps = ref([
     "Shipping",
@@ -29,9 +31,16 @@ function setStep(newStep: number) {
     currentStep.value = newStep;
 }
 
-onMounted(() => {
+function calculateTotal() {
+    return cart.value.reduce((total, currentCartItem) => total = total + currentCartItem.price * currentCartItem.amount, 0);
+}
+
+function sendData() {
+    console.log(formData);
     console.log(cart.value);
-});
+    updateCart([]);
+    router.push("/");
+}
 
 </script>
 
@@ -51,7 +60,6 @@ onMounted(() => {
         </div>
 
         <template v-if="currentStep === 0">
-            <!-- <Shipping /> -->
              <Shipping v-bind:form-data="formData"/>
         </template>
 
@@ -79,9 +87,9 @@ onMounted(() => {
             <button 
                 v-else
                 class="button"
-                @click="() => {console.log(formData)}"
+                @click="sendData"
             >
-                Order
+                Order for {{ calculateTotal() }} EUR
             </button>
         </div>
     </section>
