@@ -95,17 +95,64 @@ function sendData() {
     </section>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
     .screen-checkout {
-        .screen-checkout__steps {
+        &__steps {
+            background-image: url(./public/images/checkout.jpg);
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            padding: 60px 0 0;
+            margin: 0 0 48px;
             display: flex;
-            .step {
-                background-color: orange;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: inset 0 0 20px black;
 
-                &.step--active {
-                    background-color: white;
+            .step {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                box-sizing: border-box;
+                width: 100px;
+                height: 100px;
+                background-color: white;
+                margin: 0 0 32px;
+                padding: 0px;
+                border-radius: 50%;
+                transition: all .25s;
+                box-shadow: 0 0 20px rgba($color: #000000, $alpha: .5);
+
+                &--active {
+                    scale: 1.2;
+                    color: orangered;
+                }
+
+                &__index {
+                    color: orangered;
+                    margin: 0;
+                    text-align: center;
+                }
+
+                &__label {
+                    margin: 0;
+                    text-align: center;
                 }
             }
+        }
+
+        &__step-controlls {
+            box-sizing: border-box;
+            display: flex;
+            justify-content: space-between;
+            background: linear-gradient(to left, purple, orangered, orange);
+            padding: 10px;
+            position: fixed;
+            bottom: 0px;
+            left: 0px;
+            width: 100%;
+
         }
     }
 </style>

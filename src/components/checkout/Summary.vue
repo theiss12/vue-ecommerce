@@ -61,6 +61,32 @@
     </section>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+
+table {
+    font-size: 20px;
+    border-collapse: collapse;
+    margin: 0 auto;
+
+    thead {
+        tr {
+            background-color: orange;
+            border-bottom: 1px solid orangered;
+
+            th {
+                padding: 10px;
+            }
+        }
+    }
+    tbody {
+        tr {
+            background-color: white;
+            border-bottom: 1px solid black;
+            td {
+                padding: 10px;
+            }
+        }
+    }
+}
 
 </style>

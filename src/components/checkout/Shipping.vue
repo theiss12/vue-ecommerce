@@ -26,13 +26,26 @@
                         v-bind:value="formData[inputItem].value"
                         @input="changeFormData"
                     >
-                    <label v-bind:for="inputItem"> {{ formData[inputItem].label }} </label>
+                    <label class="input-label" v-bind:for="inputItem"> {{ formData[inputItem].label }} </label>
                 </p>
             </div>
         </div>
     </section>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+    .component-shipping {
+        &__form {
+            margin: 0 auto;
+            width: fit-content;
 
+            .input-container {
+                .input-label {
+                    color: white;
+                    font-size: 18px;
+                    margin-left: 10px;
+                }
+            }
+        }
+    }
 </style>

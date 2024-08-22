@@ -1,7 +1,12 @@
-<script setup lang="ts">
+<script setup lang="js">
 
-import { RouterLink } from 'vue-router';
-import { ref } from 'vue';
+import { RouterLink, useRoute, useRouter } from 'vue-router';
+import { ref, watch, inject } from 'vue';
+
+const { cart } = inject("cart");
+
+const route = useRoute();
+const router = useRouter();
 
 const navigationItems = ref([
     {path: "/", label: "Home"},
@@ -10,10 +15,21 @@ const navigationItems = ref([
     {path: "/cart", label: "Cart"}
 ]);
 const navigationClosed = ref(true);
+const searchTerm = ref("");
 
-function toggleNavigation(): void {
+function toggleNavigation() {
     navigationClosed.value = !navigationClosed.value;
 }
+
+function startSearch(submit) {
+    submit.preventDefault();
+    router.push(`/search?term=${searchTerm.value}`)
+    searchTerm.value = "";
+}
+
+watch(route, () => {
+    navigationClosed.value = true;
+});
 
 </script>
 
@@ -22,8 +38,22 @@ function toggleNavigation(): void {
         <ul v-bind:class="`component-navigation__items${navigationClosed ? ' component-navigation__items--closed' : ''}`">
             <li class="navigation-item" v-for="(navigationItem, itemIndex) in navigationItems" :key="itemIndex">
                 <RouterLink v-bind:to="navigationItem.path">
+                    <span class="pieces-indicator" v-if="cart.reduce((total, cartItem) => total = total + cartItem.amount, 0) > 0 && navigationItem.label === 'Cart'">
+                        {{ cart.reduce((total, cartItem) => total = total + cartItem.amount, 0) }}
+                    </span>
                     {{ navigationItem.label }}
                 </RouterLink>
+            </li>
+            <li class="navigation-item navigation-item--search">
+                <form class="search-container" @submit="startSearch">
+                    <input
+                        class="search-input"
+                        type="text"
+                        placeholder="🔎Search for products..."
+                        @input="input => searchTerm = input.target.value"
+                        :value="searchTerm"
+                    >
+                </form>
             </li>
             <li class="navigation-item--toggle">
                 <button
@@ -49,6 +79,22 @@ function toggleNavigation(): void {
             padding: 0;
             margin: 0;
 
+            &--search {
+                padding: 8px 0;
+                background-color: orange;
+                box-shadow: 0 0 20px rgba(0,0,0,.5);
+
+                .search-input {
+                    display: block;
+                    margin: 0 auto;
+                    background-color: rgba(255,255,255,0.5);
+                    border: none;
+                    font-size: 18px;
+                    padding: 10px;
+                    border-bottom: 2px solid black;
+                }
+            }
+
             a {
                 display: block;
                 text-decoration: none;
@@ -61,6 +107,18 @@ function toggleNavigation(): void {
                 text-align: center;
                 transition: all .25s;
                 box-shadow: 0 0 20px rgba(0,0,0,.5);
+
+                .pieces-indicator {
+                    --size: 20px;
+
+                    width: var(--size);
+                    height: var(--size);
+                    display: inline-flex;
+                    justify-content: center;
+                    align-items: center;
+                    border: 2px solid #333;
+                    border-radius: 2px;
+                }
             }
 
             &--toggle {
@@ -110,27 +168,38 @@ function toggleNavigation(): void {
                         }
                     }
                 }
-            }
-        }
-    }
 
-    @media (min-width: 421px) {
-        .component-navigation {
-            &__items {
+                &--search {
+                padding: 0px 0;
+                height: 0px;
 
-                .navigation-item {
-                    
-                    a {
-                        
-                    }
-
-                    &--toggle {
-                        display: none;
-                    }
+                .search-input {
+                    padding: 0px 10px;
+                    height: 0px;
+                    border-bottom-width: 0px;
                 }
             }
+            }
         }
     }
+
+    // @media (min-width: 421px) {
+    //     .component-navigation {
+    //         &__items {
+
+    //             .navigation-item {
+                    
+    //                 a {
+                        
+    //                 }
+
+    //                 &--toggle {
+    //                     display: none;
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
 }
 
 </style>

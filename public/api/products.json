@@ -62,62 +62,62 @@
         },
         {
             "id": 11,
-            "description": "Fireproof Matches",
-            "imageUrl": "./images/p (1).jpg",
+            "description": "Perpetual Motion Stopwatch",
+            "imageUrl": "./images/p (11).jpg",
             "price": 100
         },
         {
             "id": 12,
-            "description": "Silent Alarm Clock",
-            "imageUrl": "./images/p (2).jpg",
+            "description": "Soundproof Headphones",
+            "imageUrl": "./images/p (12).jpg",
             "price": 200
         },
         {
             "id": 13,
-            "description": "Invisible Paint",
-            "imageUrl": "./images/p (3).jpg",
+            "description": "Inflatable Pinhole",
+            "imageUrl": "./images/p (13).jpg",
             "price": 300
         },
         {
             "id": 14,
-            "description": "Edible Cutlery",
-            "imageUrl": "./images/p (4).jpg",
+            "description": "Non-stick Adhesive",
+            "imageUrl": "./images/p (14).jpg",
             "price": 400
         },
         {
             "id": 15,
-            "description": "Dehydrated Water",
-            "imageUrl": "./images/p (5).jpg",
+            "description": "Hypoallergenic Cat Fur",
+            "imageUrl": "./images/p (15).jpg",
             "price": 500
         },
         {
             "id": 16,
-            "description": "Self-Deflating Balloon",
-            "imageUrl": "./images/p (6).jpg",
+            "description": "Unbreakable Glass Shards",
+            "imageUrl": "./images/p (16).jpg",
             "price": 600
         },
         {
             "id": 17,
-            "description": "One-Time Use Reusable Bag",
-            "imageUrl": "./images/p (7).jpg",
+            "description": "Cold Hotplate",
+            "imageUrl": "./images/p (17).jpg",
             "price": 700
         },
         {
             "id": 18,
-            "description": "Flammable Fire Extinguisher",
-            "imageUrl": "./images/p (8).jpg",
+            "description": "Disappearing Ink Pen",
+            "imageUrl": "./images/p (18).jpg",
             "price": 800
         },
         {
             "id": 19,
-            "description": "Transparent Privacy Screen",
-            "imageUrl": "./images/p (9).jpg",
+            "description": "Expandable Collapsible Chair",
+            "imageUrl": "./images/p (19).jpg",
             "price": 900
         },
         {
             "id": 20,
-            "description": "Instantly Melting Ice",
-            "imageUrl": "./images/p (10).jpg",
+            "description": "Leak-Proof Watering Can",
+            "imageUrl": "./images/p (20).jpg",
             "price": 1000
         }
     ]

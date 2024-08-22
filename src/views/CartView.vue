@@ -19,24 +19,21 @@ const { cart, addCartItem, removeCartItem } = inject("cart");
                     <h2 class="cart-item__description">
                         {{ cartItem.description }}
                     </h2>
-                    <p class="cart-item__price">
-                        {{ cartItem.price }} EUR
-                    </p>
                     <div class="amount-changing">
                         <button
                             class="amount-changing__button amount-changing__button--minus"
                             @click="() => { removeCartItem(cartItem) }"
                         >
-                            -
+                            -{{ cartItem.amount - 1 }}
                         </button>
-                        <p class="amount-changing__amount">
-                            x{{ cartItem.amount }}
+                        <p class="amount-changing__amount" :title="`${cartItem.amount} pcs`">
+                            {{ cartItem.price * cartItem.amount }} EUR
                         </p>
                         <button 
                             class="amount-changing__button amount-changing__button--plus"
                             @click="() => { addCartItem(cartItem) }"
                         >
-                            +
+                            +{{ cartItem.amount + 1 }}
                         </button>
                     </div>
                     <button
@@ -98,12 +95,12 @@ const { cart, addCartItem, removeCartItem } = inject("cart");
                     width: 100px;
                 }
 
-                &__price {
-                    margin: 0;
-                    font-size: 16px;
-                    text-align: center;
-                    width: 40px;
-                }
+                // &__price {
+                //     margin: 0;
+                //     font-size: 16px;
+                //     text-align: center;
+                //     width: 40px;
+                // }
 
                 .amount-changing {
                     display: flex;

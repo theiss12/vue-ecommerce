@@ -3,17 +3,20 @@
 </script>
 
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+  <section class="screen-about">
+    <div class="container">
+      <h1>About</h1>
+      <ol>
+        <li>This is a demo project for Vue framework.</li>
+        <li>Nothing is sold here.</li>
+        <li>This is just a mock e-shop</li>
+        <li>Even if you complete the checkout process</li>
+        <li>So go spend your money somewhere else :)</li>
+      </ol>
+    </div>
+  </section>
 </template>
 
-<style>
-/* @media (min-width: 1024px) {
-  .about {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
-} */
+<style scoped lang="scss">
+
 </style>

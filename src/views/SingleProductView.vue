@@ -87,10 +87,10 @@ watch(route, () => {
         &__image {
             object-fit: contain;
             height: 50svh;
-            width: 100svw;
+            width: 90vw;
             background-color: white;
             display: block;
-            padding: 50px 0;
+            padding: 50px 5vw;
             margin: 0 0 48px;
             box-shadow: inset 0 0 20px black;
             border-radius: 10px;
