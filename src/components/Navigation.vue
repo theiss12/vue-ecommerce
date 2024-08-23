@@ -11,7 +11,6 @@ const router = useRouter();
 const navigationItems = ref([
     {path: "/", label: "Home"},
     {path: "/about", label: "About"},
-    // {path: "/products", label: "Products"},
     {path: "/cart", label: "Cart"}
 ]);
 const navigationClosed = ref(true);
@@ -170,36 +169,72 @@ watch(route, () => {
                 }
 
                 &--search {
-                padding: 0px 0;
-                height: 0px;
-
-                .search-input {
-                    padding: 0px 10px;
+                    padding: 0px 0;
                     height: 0px;
-                    border-bottom-width: 0px;
+
+                    .search-input {
+                        padding: 0px 10px;
+                        height: 0px;
+                        border-bottom-width: 0px;
+                        transition: all .25s;
+                        outline: 0;
+
+                        &:focus-visible {
+                            background-color: white;
+                        }
+                    }
                 }
-            }
             }
         }
     }
 
-    // @media (min-width: 421px) {
-    //     .component-navigation {
-    //         &__items {
+    @media (min-width: 421px) {
+        .component-navigation {
+            &__items {
+                display: flex;
+                width: 100%;
+                background-color: orange;
 
-    //             .navigation-item {
+                .navigation-item {
+                    margin: 0 30px;
                     
-    //                 a {
-                        
-    //                 }
+                    a {
+                        box-shadow: none;
+                    }
 
-    //                 &--toggle {
-    //                     display: none;
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
+                    &--toggle {
+                        display: none;
+                    }
+
+                    &--search {
+                        box-shadow: none;
+                        margin-left: auto;
+                    }
+                }
+
+                &--closed {
+                    .navigation-item {
+                        a {
+                            padding: 20px 0px;
+                            height: unset;
+                        }
+
+
+                        &--search {
+                            padding: 8px 0;
+                            height: unset;
+
+                            .search-input {
+                                padding: 10px;
+                                height: unset;
+                                border-bottom-width: 2px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 </style>

@@ -110,6 +110,7 @@ const { cart, addCartItem, removeCartItem } = inject("cart");
                     &__amount {
                         margin: 0;
                         font-size: 16px;
+                        text-align: center;
                         text-decoration: underline;
                     }
 
@@ -125,6 +126,7 @@ const { cart, addCartItem, removeCartItem } = inject("cart");
                         padding: 0px;
                         border-radius: 50%;
                         transition: all .25s;
+                        box-shadow: 0 0 10px rgba($color: #000000, $alpha: .5);
 
                         &:active {
                             scale: 1.2;
@@ -133,6 +135,7 @@ const { cart, addCartItem, removeCartItem } = inject("cart");
                 }
 
                 &__delete-button {
+                    padding: 0;
                     cursor: pointer;
                     position: absolute;
                     top: 5px;
@@ -142,6 +145,7 @@ const { cart, addCartItem, removeCartItem } = inject("cart");
                     color: white;
                     border: none;
                     border-radius: 5px;
+                    box-shadow: 0 0 10px rgba($color: #000000, $alpha: .5);
                 }
             }
         }
@@ -191,6 +195,54 @@ const { cart, addCartItem, removeCartItem } = inject("cart");
             50% {
                 scale: 1.1;
                 box-shadow: 0 0 20px crimson;
+            }
+        }
+    }
+
+    @media (min-width: 421px) {
+        .screen-cart {
+            &__items {
+                .cart-item {
+                    max-width: 50%;
+                    margin: 48px auto;
+
+                    &__image {
+                        --size: 150px;
+                    }
+
+                    &__description {
+                        width: 33%;
+                        font-size: 32px;
+                    }
+
+                    .amount-changing {
+
+                        &__amount {
+                            font-size: 24px;
+                        }
+
+                        &__button {
+                            cursor: pointer;
+                            width: 40px;
+                            height: 40px;
+                            font-weight: bold;
+                        }
+                    }
+
+                    &__delete-button {
+                        font-size: 32px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        width: 36px;
+                        height: 36px;
+                    }
+                }
+            }
+
+            .empty-cart {
+                width: 30vw;
+                min-height: 25vh;
             }
         }
     }

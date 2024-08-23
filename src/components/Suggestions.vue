@@ -102,4 +102,23 @@ watch(route, () => {
     }
 }
 
+@media (min-width: 421px) {
+    .component-suggestions {
+        min-height: 80vh;
+
+        .suggestions {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 80px;
+
+            .suggestion {
+                cursor: pointer;
+                width: 20vw;
+                height: 20vw;
+            }
+        }
+    }
+}
+
 </style>

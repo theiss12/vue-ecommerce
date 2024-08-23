@@ -16,6 +16,7 @@ const slugProduct = ref({
     price: 0
 });
 const notFound = ref(false);
+const isMessageOpen = ref(false);
 
 function setProductByQueryString() {
     if (!route.query) {
@@ -35,6 +36,7 @@ function setProductByQueryString() {
 onMounted(() => setProductByQueryString());
 
 watch(route, () => {
+    notFound.value = false;
     setProductByQueryString();
 })
 
@@ -42,40 +44,52 @@ watch(route, () => {
 
 <template>
     <section class="screen-product">
-        <div class="container">
-            <div v-if="!notFound" class="product">
+        <div v-if="!notFound" class="product">
+            <div class="product__image-frame">
                 <img class="product__image" :src="slugProduct.imageUrl">
-                <h2 class="product__description">
-                    {{ slugProduct.description }}
-                </h2>
-                <p class="product__price">
-                    {{ slugProduct.price }} EUR
+            </div>
+            <h2 class="product__description">
+                {{ slugProduct.description }}
+            </h2>
+            <p class="product__price">
+                {{ slugProduct.price }} EUR
+            </p>
+            <div class="controlls">
+                <button
+                    class="controlls__button controlls__button--back"
+                    @click="() => {router.push('/')}"
+                >
+                    Back
+                </button>
+                <button
+                    class="controlls__button controlls__button--cart"
+                    @click="() => {
+                        addCartItem(slugProduct);
+                        isMessageOpen = true;
+                    }"
+                >
+                    Add To Cart
+                </button>
+            </div>
+        </div>
+        <div v-else class="not-found-message">
+            Product not found!
+        </div>
+        <Suggestions
+            v-if="!notFound"
+            :suggestables="products.map(product => ({
+                title: product.description, 
+                imageUrl: product.imageUrl, 
+                endpointUrl: `/product?id=${product.id}`
+            }))"
+        />
+        <div class="screen-product__cart-message" v-if="isMessageOpen">
+            <div class="message-wrapper">
+                <p class="message">
+                    Product is now in your cart.
                 </p>
-                <div class="controlls">
-                    <button
-                        class="controlls__button controlls__button--back"
-                        @click="() => {router.push('/')}"
-                    >
-                        Back
-                    </button>
-                    <button
-                        class="controlls__button controlls__button--cart"
-                        @click="() => {addCartItem(slugProduct)}"
-                    >
-                        Add To Cart
-                    </button>
-                </div>
+                <button class="close-button" @click="() => {isMessageOpen = false}">Got it</button>
             </div>
-            <div v-else class="not-found-message">
-                Product not found!
-            </div>
-            <Suggestions
-                :suggestables="products.map(product => ({
-                    title: product.description, 
-                    imageUrl: product.imageUrl, 
-                    endpointUrl: `/product?id=${product.id}`
-                }))"
-            />
         </div>
     </section>
 </template>
@@ -84,16 +98,31 @@ watch(route, () => {
 
 .screen-product {
     .product {
-        &__image {
-            object-fit: contain;
-            height: 50svh;
-            width: 90vw;
+        &__image-frame {
             background-color: white;
-            display: block;
-            padding: 50px 5vw;
-            margin: 0 0 48px;
-            box-shadow: inset 0 0 20px black;
             border-radius: 10px;
+            box-shadow: inset 0 0 20px black;
+            min-height: 50vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 0 48px;
+        }
+        &__image {
+            // object-fit: contain;
+            // height: 50svh;
+            // width: 90vw;
+            // background-color: white;
+            // display: block;
+            // padding: 50px 5vw;
+            // margin: 0 0 48px;
+            // box-shadow: inset 0 0 20px black;
+            // border-radius: 10px;
+            height: 45vh;
+            width: 75%;
+            object-fit: contain;
+            filter: drop-shadow(0 0 20px rgba(0,0,0,.8));
+
         }
 
         &__description {
@@ -138,6 +167,57 @@ watch(route, () => {
             }
         }
     }
+
+    &__cart-message {
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        z-index: 5000;
+        width: 100vw;
+        height: 100svh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        animation-name: blur;
+        animation-duration: 1s;
+        animation-fill-mode: forwards;
+
+        .message-wrapper {
+            background-color: #333;
+            box-shadow: 0 0 20px rgba($color: #000000, $alpha: .5);
+            padding: 20px;
+            width: 66vw;
+
+            .message {
+                text-align: center;
+                font-size: 24px;
+                color: white;
+                margin: 0 0 24px;
+                padding: 0;
+            }
+
+            .close-button {
+                display: block;
+                padding: 10px;
+                margin: 0 auto;
+                font-size: 18px;
+                border: none;
+                background-color: deepskyblue;
+                box-shadow: 0 0 10px deepskyblue;
+                border-radius: 400px;
+            }
+        }
+
+    }
+
+    @keyframes blur {
+        from {        
+            backdrop-filter: blur(0px);
+        }
+        to {        
+            backdrop-filter: blur(10px);
+        }
+    }
 }
 
 .not-found-message {
@@ -170,6 +250,55 @@ watch(route, () => {
         100% {
             scale: 1
         }
+    }
+}
+
+@media (min-width: 421px) {
+    .screen-product {
+        .product {
+            &__image-frame {
+                min-height: 70vh;
+            }
+
+            &__image {
+                height: 65vh;
+            }
+
+            &__description,
+            &__price,
+            .controlls {
+                margin: 72px;
+            }
+
+            .controlls {
+                &__button {
+                    transition: all .25s;
+
+                    &:hover {
+                        scale: 1.1;
+                        box-shadow: 0 0 20px var(--color);
+                    }
+                }
+            }
+        }
+
+        &__cart-message {
+
+            .message-wrapper {
+                padding: 20px;
+                width: 25vw;
+                padding: 48px 0;
+
+                .message {
+                    margin: 0 0 48px;
+                    padding: 0;
+                }
+            }
+
+        }
+    }
+    .not-found-message {
+        width: 25vw;
     }
 }
 

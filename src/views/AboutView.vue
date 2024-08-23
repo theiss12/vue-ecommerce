@@ -18,5 +18,15 @@
 </template>
 
 <style scoped lang="scss">
+  .screen-about {
+    color: white;
+  }
 
+  @media (min-width: 421px) {
+    .screen-about {
+      * {
+        font-size: 36px;
+      }
+    }
+  }
 </style>

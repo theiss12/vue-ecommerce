@@ -36,7 +36,7 @@ function calculateTotal() {
 }
 
 function sendData() {
-    console.log(formData);
+    console.log(formData.value);
     console.log(cart.value);
     updateCart([]);
     router.push("/");
@@ -145,7 +145,6 @@ function sendData() {
         &__step-controlls {
             box-sizing: border-box;
             display: flex;
-            justify-content: space-between;
             background: linear-gradient(to left, purple, orangered, orange);
             padding: 10px;
             position: fixed;
@@ -153,6 +152,12 @@ function sendData() {
             left: 0px;
             width: 100%;
 
+            .button {
+                display: block;
+                &:last-child {
+                    margin-left: auto;
+                }
+            }
         }
     }
 </style>

@@ -13,7 +13,7 @@ const serviceItems = ref(props.serviceItems);
 
 <template>
     <section class="component-services">
-        <div class="container">
+        
             <div class="component-services__items">
                 <div
                     class="service"
@@ -32,7 +32,7 @@ const serviceItems = ref(props.serviceItems);
                     <RouterLink class="button" v-bind:to="serviceItem.endpointUrl">Visit</RouterLink>
                 </div>
             </div>
-        </div>
+        
     </section>
 </template>
 
@@ -86,6 +86,24 @@ const serviceItems = ref(props.serviceItems);
                 background-color: darkgray;
                 box-shadow: 0 0 20px rgba(255, 255, 255, .5);
                 scale: 1.1;
+            }
+        }
+    }
+}
+
+@media (min-width: 421px) {
+    .component-services {
+        display: flex;
+        align-items: center;
+        
+        &__items {
+            width: 100%;
+            flex-direction: row;
+
+            .service {
+                &__image {
+                    --image-size: 200px;
+                }
             }
         }
     }

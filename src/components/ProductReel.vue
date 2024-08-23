@@ -68,16 +68,13 @@ onMounted(() => {
             ↺
         </button>
         <div class="component-slider__slides">
-            <!-- <img v-for="(product, index) in randomProducts" :key="index"
-                v-bind:class="`slide${index === activeIndex ? ' slide--active' : ''}`" v-bind:src="product.imageUrl"
-                @click="() => { console.log(product.id) }"> -->
             <div 
                 v-for="(product, index) in randomProducts" :key="index"
                 v-bind:class="`slide${index === activeIndex ? ' slide--active' : ''}`"
                 v-bind:style="`background-image: url('${product.imageUrl}')`"
                 @click="() => { router.push(`/product?id=${product.id}`) }"
             >
-                <h2 class="slide__description">
+                <h2 class="slide__description" @click="() => { router.push(`/product?id=${product.id}`) }">
                     {{ product.description }}
                 </h2>
             </div>
@@ -136,8 +133,6 @@ onMounted(() => {
         top: 10px;
         right: 0px;
         background-color: transparent;
-        // color: white;
-        // text-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px, rgba(0, 0, 0, 0.3) 0px 2px 13px, rgba(0, 0, 0, 0.3) 0px 3px 23px;
         font-size: 36px;
     }
 
@@ -249,6 +244,59 @@ onMounted(() => {
 
             &--active {
                 scale: 1.5;
+            }
+        }
+    }
+}
+
+@media (min-width: 421px) {
+    .component-slider {
+        .reroll-button {
+            cursor: pointer;
+            top: 50px;
+            right: 50px;
+            transition: scale .25s;
+
+            &:hover {
+                scale: 1.5;
+            }
+        }
+
+        &__slides {
+            min-height: 75vh;
+
+            .slide {
+                cursor: pointer;
+                width: 45vw;
+                height: 80%;
+
+                &__description {
+                    cursor: pointer;
+                    padding: 20px;
+                    width: 50%;
+                    font-size: 36px;
+                }
+            }
+        }
+
+        &__controlls {
+            .swap-button {
+                transition: scale .25s;
+                cursor: pointer;
+                margin: 50px;
+
+                &:hover {
+                    scale: 1.5;
+                }
+            }
+        }
+
+        &__pagination {
+            .pagination-button {
+                cursor: pointer;
+                &:hover {
+                    scale: 2;
+                }
             }
         }
     }
